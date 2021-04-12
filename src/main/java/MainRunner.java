@@ -12,13 +12,13 @@ public class MainRunner
         }
         String[] ingredients = {"water", "milk", "beans", "cups", "money"};
         String mycode = input + "";
-        System.out.println(mycode);
+        //System.out.println(mycode);
         for (int ii = 0; ii < 5; ii++)
         {
             char fourtest = mycode.charAt(mycode.length()-(1+ii));
             if (fourtest == '4')
             {
-                System.out.println("not enough " + ingredients[4-ii]);
+                System.out.println("not enough " + ingredients[ii]);
             }
             if (fourtest == '-')break;
         }
@@ -30,11 +30,11 @@ public class MainRunner
         // initialize with max value so no chance of it being too small for comparisons
         int errorcode = 0;
         /*
-        -4 for not enough money,
-        -40 for not enough cups,
+        -4 for not enough water,
+        -40 for not enough milk,
         -400 for not enough coffee,
-        -4000 for not enough milk,
-        -40000 for not enough water
+        -4000 for not enough cups,
+        -40000 for not enough money
          */
         boolean enough = true;
         int retsPerW = retval;
@@ -101,6 +101,9 @@ public class MainRunner
         int beans = 120;
         int cups = 9;
         int money = 550;
+        int[] WMBC$ = {water,milk,beans,cups,money};
+        String[] ingredientNames = {"water","milk","beans","cups","money"};
+        //water,milk,beans,cups,money
 
         while (repeat)
         {
@@ -164,15 +167,15 @@ public class MainRunner
                     {
 
 
-                        drinks = pDrinksError(possibleDrinks(water,milk,beans,cups,money,userDrink));
+                        drinks = pDrinksError(possibleDrinks(WMBC$[0],WMBC$[1],WMBC$[2],WMBC$[3],WMBC$[4], userDrink));
                         if (drinks >0)
                         {
 
-                            water-=userDrink.getWater();
-                            milk-=userDrink.getMilk();
-                            beans-=userDrink.getBeans();
-                            cups-=userDrink.getCups();
-                            money-=userDrink.getMoney();
+                            WMBC$[0] -= userDrink.getWater();
+                            WMBC$[1] -= userDrink.getMilk();
+                            WMBC$[2] -= userDrink.getBeans();
+                            WMBC$[3] -= userDrink.getCups();
+                            WMBC$[4] -= userDrink.getMoney();
                             System.out.println("Made 1 " + userDrink.getName());
                         }
                     }
@@ -181,7 +184,20 @@ public class MainRunner
                 }
                 case 'f': //fill
                 {
-                    System.out.println(userInput+" not yet supported");
+
+                    String[] fillStringList = new String[5];
+                    int[] fillIntList = new int[5];
+
+                    System.out.println("Type an integer to add that much of the following");
+                    for (int ii = 0; ii < 5; ii++)
+                    {
+                        System.out.println(ingredientNames[ii]+": ");
+                        fillStringList[ii] = scanner.nextLine().toLowerCase();
+                        fillIntList[ii] = Integer.parseInt(fillStringList[ii]);
+                        //System.out.println(WMBC$[ii]);
+                        WMBC$[ii]+= fillIntList[ii];
+                        //System.out.println(WMBC$[ii]);
+                    }
                     break;
                 }
                 case 't': //take
@@ -193,11 +209,11 @@ public class MainRunner
                 {
                     System.out.println(
                             "The coffee machine has:\n" +
-                                    water + "\t water\n" +
-                                    milk + "\t milk\n" +
-                                    beans + "\t beans\n" +
-                                    cups + "\t cups\n" +
-                                    money + "\t money\n");
+                                    WMBC$[0] + "\t water\n" +
+                                    WMBC$[1] + "\t milk\n" +
+                                    WMBC$[2] + "\t beans\n" +
+                                    WMBC$[3] + "\t cups\n" +
+                                    WMBC$[4] + "\t money\n");
                     break;
                 }
                 default:
