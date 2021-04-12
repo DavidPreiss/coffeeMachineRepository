@@ -202,7 +202,8 @@ public class MainRunner
                 }
                 case 't': //take
                 {
-                    System.out.println(userInput+" not yet supported");
+                    System.out.println("I give you $ "+ WMBC$[4]);
+                    WMBC$[4] = 0;//set money to 0
                     break;
                 }
                 case 'r': //remaining
